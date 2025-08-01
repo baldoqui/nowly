@@ -8,11 +8,17 @@ function getContentUrl(lang){
 const strings = {
   pt: {
     loading: "Carregando...",
-    error: "Erro ao carregar conteúdo."
+    error: "Erro ao carregar conteúdo.",
+    play: "Tocar",
+    pause: "Pausar",
+    toggleTheme: "Alternar tema"
   },
   en: {
     loading: "Loading...",
-    error: "Failed to load content."
+    error: "Failed to load content.",
+    play: "Play",
+    pause: "Pause",
+    toggleTheme: "Toggle theme"
   }
 };
 
@@ -33,6 +39,7 @@ const themeToggle = document.getElementById("theme-toggle");
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
+  themeToggle.setAttribute("aria-label", strings[lang].toggleTheme);
   if (theme === "dark") {
     themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
   } else {
@@ -60,9 +67,11 @@ function togglePlayPause() {
   if (audio.paused) {
     audio.play();
     playPauseBtn.innerHTML = '<i class="bi bi-pause-circle-fill"></i>';
+    playPauseBtn.setAttribute("aria-label", strings[lang].pause);
   } else {
     audio.pause();
     playPauseBtn.innerHTML = '<i class="bi bi-play-circle-fill"></i>';
+    playPauseBtn.setAttribute("aria-label", strings[lang].play);
   }
 }
 

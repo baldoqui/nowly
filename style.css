@@ -24,6 +24,11 @@ a {
   color: var(--link);
 }
 
+:is(a, button, input):focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
 header {
   display: flex;
   justify-content: space-between;
