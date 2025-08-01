@@ -28,11 +28,84 @@ fetch(getContentUrl(lang))
   .then(res => res.text())
   .then(md => {
     document.getElementById("content").innerHTML = marked.parse(md);
+    processSources();
   })
   .catch(err => {
     document.getElementById("content").textContent = strings[lang].error;
     console.error(err);
   });
+
+function processSources() {
+  const contentDiv = document.getElementById("content");
+  const children = Array.from(contentDiv.children);
+
+  let currentH2Wrapper = null;
+  let sectionLinks = [];
+
+  const createSourceContainer = (links, targetWrapper) => {
+    if (links.length === 0) return;
+
+    const sourceIndicatorContainer = document.createElement("div");
+    sourceIndicatorContainer.classList.add("source-indicator-container");
+
+    links.forEach(linkData => {
+      const sourceItem = document.createElement("div");
+      sourceItem.classList.add("source-item");
+
+      const faviconImg = document.createElement("img");
+      faviconImg.classList.add("source-favicon");
+      faviconImg.src = `https://www.google.com/s2/favicons?domain=${new URL(linkData.href).hostname}`;
+      faviconImg.alt = `Favicon for ${new URL(linkData.href).hostname}`;
+
+      const sourcePopup = document.createElement("div");
+      sourcePopup.classList.add("source-popup");
+      sourcePopup.innerHTML = `<a href="${linkData.href}" target="_blank" rel="noopener noreferrer">${linkData.text}</a>`;
+
+      sourceItem.appendChild(faviconImg);
+      sourceItem.appendChild(sourcePopup);
+      sourceIndicatorContainer.appendChild(sourceItem);
+
+      sourceItem.addEventListener("click", () => {
+        window.open(linkData.href, "_blank");
+      });
+    });
+
+    targetWrapper.appendChild(sourceIndicatorContainer);
+  };
+
+  children.forEach(child => {
+    if (child.tagName === "H2") {
+      if (currentH2Wrapper && sectionLinks.length > 0) {
+        createSourceContainer(sectionLinks, currentH2Wrapper);
+      }
+      const h2Wrapper = document.createElement("div");
+      h2Wrapper.classList.add("h2-section-wrapper");
+      child.parentNode.insertBefore(h2Wrapper, child);
+      h2Wrapper.appendChild(child);
+      currentH2Wrapper = h2Wrapper;
+      sectionLinks = [];
+    } else if (child.tagName === "P") {
+      const links = child.querySelectorAll("a");
+      if (links.length > 0) {
+        links.forEach(link => {
+          sectionLinks.push({ href: link.href, text: link.textContent });
+        });
+        child.remove(); // Remove the paragraph if it contained links
+      }
+    }
+  });
+
+  if (sectionLinks.length > 0) {
+    if (currentH2Wrapper) {
+      createSourceContainer(sectionLinks, currentH2Wrapper);
+    } else {
+      const h2Wrapper = document.createElement("div");
+      h2Wrapper.classList.add("h2-section-wrapper");
+      contentDiv.prepend(h2Wrapper);
+      createSourceContainer(sectionLinks, h2Wrapper);
+    }
+  }
+}
 
 const themeToggle = document.getElementById("theme-toggle");
 
