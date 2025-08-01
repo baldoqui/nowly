@@ -72,3 +72,48 @@ pre {
 [data-theme="dark"] pre {
   background: #333;
 }
+
+#audio-player-container {
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+#audio-player {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#progress-bar {
+  width: 100%;
+  margin: 0 10px;
+}
+
+#playback-speed-btn {
+  background: none;
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  border-radius: 4px;
+  min-width: 40px;
+}
+
+.play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--fg);
+}
+
+.play-btn:hover {
+  opacity: 0.8;
+}
+
+
+@media (max-width: 600px) {
