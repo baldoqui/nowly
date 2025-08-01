@@ -2,12 +2,16 @@
   --bg: #ffffff;
   --fg: #111111;
   --link: #0a58ca;
+  --source-bg: #f0f0f0;
+  --source-border: #ccc;
 }
 
 [data-theme="dark"] {
   --bg: #111111;
   --fg: #ffffff;
   --link: #66aaff;
+  --source-bg: #333333;
+  --source-border: #555;
 }
 
 body {
@@ -120,5 +124,72 @@ pre {
   opacity: 0.8;
 }
 
+.h2-section-wrapper {
+  position: relative;
+  margin-bottom: 2em;
+  padding-right: 40px;
+}
+
+.source-indicator-container {
+  position: absolute;
+  top: 0;
+  right: -30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+}
+
+.source-item {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease-out, z-index 0.3s ease-out;
+}
+
+.source-favicon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--source-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.source-popup {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--source-bg);
+  border: 1px solid var(--source-border);
+  padding: 8px 12px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.source-item:hover .source-popup {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.source-popup a {
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.source-popup a:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 600px) {
+  .source-indicator-container {
+    right: 5px;
+  }
+}
