@@ -156,38 +156,6 @@ pre {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.source-popup {
-  position: absolute;
-  left: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: var(--source-bg);
-  border: 1px solid var(--source-border);
-  padding: 8px 12px;
-  border-radius: 5px;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  pointer-events: none;
-}
-
-.source-item:hover .source-popup {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.source-popup a {
-  text-decoration: none;
-  color: var(--fg);
-}
-
-.source-popup a:hover {
-  text-decoration: underline;
-}
-
 @media (max-width: 600px) {
   .source-indicator-container {
     right: 5px;

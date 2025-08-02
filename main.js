@@ -57,12 +57,7 @@ function processSources() {
       faviconImg.src = `https://www.google.com/s2/favicons?domain=${new URL(linkData.href).hostname}`;
       faviconImg.alt = `Favicon for ${new URL(linkData.href).hostname}`;
 
-      const sourcePopup = document.createElement("div");
-      sourcePopup.classList.add("source-popup");
-      sourcePopup.innerHTML = `<a href="${linkData.href}" target="_blank" rel="noopener noreferrer">${linkData.text}</a>`;
-
       sourceItem.appendChild(faviconImg);
-      sourceItem.appendChild(sourcePopup);
       sourceIndicatorContainer.appendChild(sourceItem);
 
       sourceItem.addEventListener("click", () => {
