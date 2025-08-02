@@ -1,8 +1,8 @@
 const lang = window.location.pathname.includes("/pt") ? "pt" : "en";
 
 function getContentUrl(lang){
-    if(lang == "pt") return "https://pub-cbb53e25b97244bbb81044420fb53b8d.r2.dev/lasthour-pt.txt"
-    else return "https://pub-cbb53e25b97244bbb81044420fb53b8d.r2.dev/lasthour-en.txt"
+    if(lang == "pt") return "https://content.now-ly.com/lasthour-pt.txt"
+    else return "https://content.now-ly.com/lasthour-en.txt"
 }
 
 const strings = {
