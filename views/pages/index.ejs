@@ -1,0 +1,14 @@
+<%- include('../partials/header'); %>
+
+  <div id="audio-player-container">
+    <div id="audio-player">
+      <button id="play-pause-btn" class="play-btn" aria-label="<%= play_alt %>"></button>
+      <input type="range" id="progress-bar" value="0" aria-label="Audio progress" />
+      <button id="playback-speed-btn" aria-label="Change playback speed">1x</button>
+      <audio id="audio" src="https://content.now-ly.com/lasthour-<%= lang %>.mp3"></audio>
+    </div>
+  </div>
+
+  <main id="content"><%- contentHtml %></main>
+
+<%- include('../partials/footer'); %>

@@ -40,6 +40,8 @@ header {
   margin-bottom: 2rem;
 }
 
+
+
 h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -160,4 +162,65 @@ pre {
   .source-indicator-container {
     right: 5px;
   }
+}
+
+footer {
+  background-color: var(--source-bg);
+  color: var(--fg);
+  padding: 40px 20px;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+footer h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+footer p {
+  max-width: 500px;
+  margin: 0 auto 20px;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
+
+.footer-nav {
+  margin-bottom: 15px;
+}
+
+.footer-nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+  color: var(--link);
+}
+
+@media (max-width: 600px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 10px; /* Add some space between stacked links */
+  }
+
+  .footer-nav a {
+    margin: 5px 0; /* Adjust margins for vertical stacking */
+  }
+}
+
+.footer-copyright {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+[data-theme="dark"] .footer-copyright {
+  color: #adb5bd;
 }

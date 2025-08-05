@@ -1,0 +1,30 @@
+{
+  "name": "nowly",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "marked": "^16.1.2"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^1.0.0",
+    "@types/express": "^5.0.3",
+    "@types/marked": "^6.0.0",
+    "@types/node": "^24.2.0",
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}
