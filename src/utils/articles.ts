@@ -14,7 +14,8 @@ export interface Article {
   sourceLanguage: string | null;
   placeName: string | null;
   country: string | null;
-  sources: { name: string; url: string }[] | null;
+  // title is missing on sources recorded before headlines were stored.
+  sources: { name: string; url: string; title?: string }[] | null;
   publishedAt: Date;
 }
 

@@ -1,24 +1,41 @@
 <%- include('../partials/header', { i18n: i18n, lang: lang }); %>
 
-  <main id="content">
-    <article lang="<%= article.locale %>">
-      <h2 class="article-title"><%= article.title %></h2>
-      <p class="article-meta"><%= articleMeta(article) %></p>
-      <p><strong><%= article.lead %></strong></p>
+  <main id="content" class="container container--narrow">
+    <a href="/<%= lang %>/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      <%= back_to_all %>
+    </a>
+
+    <article class="article" lang="<%= article.locale %>">
+      <% if (categoryName(article) || city(article)) { %>
+        <p class="kicker">
+          <% if (categoryName(article)) { %><span class="kicker-category"><%= categoryName(article) %></span><% } %><% if (categoryName(article) && city(article)) { %> · <% } %><%= city(article) ?? '' %>
+        </p>
+      <% } %>
+      <h1 class="article-title"><%= article.title %></h1>
+      <p class="article-meta"><%= dateTime(article.publishedAt) %><% if (sourcesCount(article)) { %> · <%= sourcesCount(article) %><% } %></p>
+      <p class="article-lead"><%= article.lead %></p>
       <% paragraphs(article.body).forEach((paragraph) => { %><p><%= paragraph %></p><% }) %>
       <% paragraphs(article.background).forEach((paragraph) => { %><p><%= paragraph %></p><% }) %>
 
       <% if (!article.sources) { %>
         <p class="article-meta"><%= sources_missing %></p>
       <% } else if (article.sources.length > 0) { %>
-        <h3><%= sources %></h3>
-        <ul class="article-sources">
-          <% article.sources.forEach((source) => { %><li><a href="<%= source.url %>" rel="noopener" target="_blank"><%= source.name %></a></li><% }) %>
-        </ul>
+        <section class="sources">
+          <h2><%= sources %></h2>
+          <ul>
+            <% article.sources.forEach((source) => { %>
+              <li>
+                <a href="<%= source.url %>" rel="noopener" target="_blank">
+                  <span><strong><%= source.name %></strong><% if (source.title) { %> <span class="source-title">· <%= source.title %></span><% } %></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+              </li>
+            <% }) %>
+          </ul>
+        </section>
       <% } %>
     </article>
-
-    <p class="disclaimer"><%= disclaimer %></p>
   </main>
 
 <%- include('../partials/footer'); %>

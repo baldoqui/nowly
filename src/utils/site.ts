@@ -3,43 +3,75 @@ import { type Article, listArticles } from './articles.js';
 
 type Lang = keyof typeof i18n;
 
-const DATE_LOCALES: Record<Lang, string> = { en: 'en-US', pt: 'pt-BR' };
+const LOCALES: Record<Lang, string> = { en: 'en-US', pt: 'pt-BR' };
+// Times are shown in São Paulo time for Portuguese readers and in UTC otherwise.
+const TIME_ZONES: Record<Lang, string> = { en: 'UTC', pt: 'America/Sao_Paulo' };
+
+export interface DayGroup {
+  label: string;
+  articles: Article[];
+}
 
 // Formatting helpers the templates use, in the page's language.
 export function helpers(lang: Lang) {
-  const languageNames = new Intl.DisplayNames([DATE_LOCALES[lang]], { type: 'language' });
   const strings = i18n[lang];
+  const locale = LOCALES[lang];
+  const timeZone = TIME_ZONES[lang];
 
-  const languageName = (code: string) => {
-    try {
-      return languageNames.of(code) ?? code;
-    } catch {
-      return code;
-    }
+  const dayLabel = (date: Date) => {
+    const label = date.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone });
+    return label.charAt(0).toUpperCase() + label.slice(1);
   };
 
+  const time = (date: Date) => {
+    const label = date.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false, timeZone });
+    return timeZone === 'UTC' ? `${label} UTC` : label;
+  };
+
+  // GDELT names places as "City, State, Country"; only the city is shown, and
+  // nothing when the place is a whole country.
+  const city = (article: Article) =>
+    article.placeName?.includes(',') ? article.placeName.split(',')[0]!.trim() : null;
+
   return {
-    languageName,
+    dayLabel,
+    time,
+    city,
+    categoryName: (article: Article) => (article.category ? strings.categories[article.category] ?? article.category : null),
+    sourcesCount: (article: Article) => (article.sources && article.sources.length > 0 ? strings.sources_count(article.sources.length) : null),
     paragraphs: (text: string) => text.split(/\n+/).map((p) => p.trim()).filter(Boolean),
-    articleMeta: (article: Article) =>
-      [
-        article.publishedAt.toLocaleDateString(DATE_LOCALES[lang], { dateStyle: 'long', timeZone: 'UTC' }),
-        article.category && (strings.categories[article.category] ?? article.category),
-        article.placeName,
-        article.sourceLanguage && strings.source_language_label(languageName(article.sourceLanguage)),
-      ]
-        .filter(Boolean)
-        .join(' · '),
+    dateTime: (date: Date) => `${dayLabel(date)}, ${time(date)}`,
   };
 }
 
+function groupByDay(articles: Article[], label: (date: Date) => string): DayGroup[] {
+  const groups: DayGroup[] = [];
+
+  for (const article of articles) {
+    const day = label(article.publishedAt);
+    const last = groups.at(-1);
+
+    if (last && last.label === day) {
+      last.articles.push(article);
+    } else {
+      groups.push({ label: day, articles: [article] });
+    }
+  }
+
+  return groups;
+}
+
 export async function indexPage(lang: Lang) {
+  const articles = await listArticles(lang);
+  const pageHelpers = helpers(lang);
+
   return {
     ...i18n[lang],
-    ...helpers(lang),
+    ...pageHelpers,
     lang,
     i18n,
-    articles: await listArticles(lang),
+    articles,
+    groups: groupByDay(articles, pageHelpers.dayLabel),
   };
 }
 
