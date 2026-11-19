@@ -11,6 +11,11 @@ export const i18n = {
     no_articles: 'No articles yet.',
     sources: 'Sources',
     sources_missing: 'Sources were not recorded for this article.',
+    sources_count: (count: number) => (count === 1 ? '1 source' : `${count} sources`),
+    back_to_all: 'All news',
+    language_switch: 'Language',
+    theme_dark: 'Switch to dark theme',
+    theme_light: 'Switch to light theme',
     source_language_label: (language: string) => `${language} sources`,
     categories: {
       world: 'World', politics: 'Politics', business: 'Business', technology: 'Technology', science: 'Science',
@@ -46,6 +51,11 @@ export const i18n = {
     no_articles: 'Ainda não há notícias.',
     sources: 'Fontes',
     sources_missing: 'As fontes desta notícia não foram registradas.',
+    sources_count: (count: number) => (count === 1 ? '1 fonte' : `${count} fontes`),
+    back_to_all: 'Todas as notícias',
+    language_switch: 'Idioma',
+    theme_dark: 'Mudar para o tema escuro',
+    theme_light: 'Mudar para o tema claro',
     source_language_label: (language: string) => `fontes em ${language}`,
     categories: {
       world: 'Mundo', politics: 'Política', business: 'Economia', technology: 'Tecnologia', science: 'Ciência',

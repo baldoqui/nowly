@@ -1,50 +1,21 @@
-const lang = window.location.pathname.includes("/pt") ? "pt" : "en";
-
-const strings = {
-  pt: {
-    play: "Tocar",
-    pause: "Pausar",
-    toggleTheme: "Alternar tema"
-  },
-  en: {
-    play: "Play",
-    pause: "Pause",
-    toggleTheme: "Toggle theme"
-  }
-};
-
-// Handle source item clicks (rendered server-side)
-document.addEventListener('click', (event) => {
-  const target = event.target;
-  const sourceItem = target.closest('.source-item');
-  if (sourceItem) {
-    const href = sourceItem.getAttribute('data-href');
-    if (href) {
-      window.open(href, '_blank');
-    }
-  }
-});
-
 const themeToggle = document.getElementById("theme-toggle");
 
+const icons = {
+  moon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+  sun: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+};
+
+// The button shows the theme it switches to.
 function setTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.dataset.theme = theme;
   localStorage.setItem("theme", theme);
-  themeToggle.setAttribute("aria-label", strings[lang].toggleTheme);
-  if (theme === "dark") {
-    themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
-  } else {
-    themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
-  }
+  const next = theme === "dark" ? "light" : "dark";
+  themeToggle.innerHTML = next === "dark" ? icons.moon : icons.sun;
+  themeToggle.setAttribute("aria-label", themeToggle.dataset[next === "dark" ? "labelDark" : "labelLight"]);
 }
 
 themeToggle.addEventListener("click", () => {
-  const currentTheme = document.documentElement.getAttribute("data-theme");
-  const newTheme = currentTheme === "dark" ? "light" : "dark";
-  setTheme(newTheme);
+  setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
 });
 
-const savedTheme = localStorage.getItem("theme");
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const defaultTheme = savedTheme || (prefersDark ? "dark" : "light");
-setTheme(defaultTheme);
+setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
