@@ -1,39 +1,16 @@
 <%- include('../partials/header', { i18n: i18n, lang: lang }); %>
 
   <main id="content">
-    <% if (sourceLanguages.length > 0 || countries.length > 0) { %>
-      <form class="filters" method="get">
-        <% if (sourceLanguages.length > 0) { %>
-          <label><%= filter_source_language %>
-            <select name="sourceLanguage">
-              <option value=""><%= filter_any %></option>
-              <% sourceLanguages.forEach((code) => { %><option value="<%= code %>"><%= languageName(code) %></option><% }) %>
-            </select>
-          </label>
-        <% } %>
-        <% if (countries.length > 0) { %>
-          <label><%= filter_country %>
-            <select name="country">
-              <option value=""><%= filter_any %></option>
-              <% countries.forEach((country) => { %><option value="<%= country %>"><%= country %></option><% }) %>
-            </select>
-          </label>
-        <% } %>
-        <button><%= filter_apply %></button>
-      </form>
-    <% } %>
-
     <% if (articles.length === 0) { %><p><%= no_articles %></p><% } %>
 
     <% articles.forEach((article) => { %>
-      <article class="article-item" data-source-language="<%= article.sourceLanguage ?? '' %>" data-country="<%= article.country ?? '' %>">
+      <article class="article-item">
         <h2><a href="/<%= lang %>/<%= article.slug %>"><%= article.title %></a></h2>
         <p class="article-meta"><%= articleMeta(article) %></p>
         <p><%= article.lead %></p>
       </article>
     <% }) %>
 
-    <p class="no-match" hidden><%= no_match %></p>
     <p class="disclaimer"><%= disclaimer %></p>
   </main>
 

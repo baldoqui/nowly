@@ -5,10 +5,6 @@ type Lang = keyof typeof i18n;
 
 const DATE_LOCALES: Record<Lang, string> = { en: 'en-US', pt: 'pt-BR' };
 
-function unique(values: (string | null)[]): string[] {
-  return [...new Set(values.filter((value): value is string => Boolean(value)))].sort();
-}
-
 // Formatting helpers the templates use, in the page's language.
 export function helpers(lang: Lang) {
   const languageNames = new Intl.DisplayNames([DATE_LOCALES[lang]], { type: 'language' });
@@ -38,16 +34,12 @@ export function helpers(lang: Lang) {
 }
 
 export async function indexPage(lang: Lang) {
-  const articles = await listArticles(lang);
-
   return {
     ...i18n[lang],
     ...helpers(lang),
     lang,
     i18n,
-    articles,
-    sourceLanguages: unique(articles.map((article) => article.sourceLanguage)),
-    countries: unique(articles.map((article) => article.country)),
+    articles: await listArticles(lang),
   };
 }
 

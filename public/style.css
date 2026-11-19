@@ -224,26 +224,8 @@ footer p {
 [data-theme="dark"] .footer-copyright {
   color: #adb5bd;
 }
-[hidden] {
-  display: none !important;
-}
 
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-}
 
-.filters select {
-  margin-left: 0.4rem;
-  background: var(--bg);
-  color: var(--fg);
-  border: 1px solid var(--source-border);
-  border-radius: 4px;
-  padding: 0.2rem 0.4rem;
-}
 
 .article-item {
   padding: 1rem 0;
