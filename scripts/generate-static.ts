@@ -32,6 +32,12 @@ async function generateStaticPages() {
     await render('index', page, `${lang}/index.html`);
     urls.push(`/${lang}/`);
 
+    // GitHub Pages serves /en/page/2 from en/page/2.html.
+    for (let number = 2; number <= page.totalPages; number++) {
+      await render('index', await indexPage(lang, number), `${lang}/page/${number}.html`);
+      urls.push(`/${lang}/page/${number}`);
+    }
+
     for (const name of ['about', 'privacy', 'contact']) {
       await render(name, { ...i18n[lang], lang, i18n }, `${lang}/${name}.html`);
       urls.push(`/${lang}/${name}`);

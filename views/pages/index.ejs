@@ -7,7 +7,7 @@
       <section class="day">
         <h2 class="day-label"><%= group.label %></h2>
         <% group.articles.forEach((article, index) => { %>
-          <article class="story<%= groupIndex === 0 && index === 0 ? ' story--lead' : '' %>">
+          <article class="story<%= page === 1 && groupIndex === 0 && index === 0 ? ' story--lead' : '' %>">
             <p class="kicker">
               <% if (categoryName(article)) { %><span class="kicker-category"><%= categoryName(article) %></span> · <% } %><%= time(article.publishedAt) %><% if (city(article)) { %> · <%= city(article) %><% } %>
             </p>
@@ -23,6 +23,14 @@
         <% }) %>
       </section>
     <% }) %>
+
+    <% if (totalPages > 1) { %>
+      <nav class="pagination" aria-label="<%= page_of.replace('{page}', page).replace('{total}', totalPages) %>">
+        <% if (newerPath) { %><a href="<%= newerPath %>" rel="prev">← <%= newer %></a><% } else { %><span></span><% } %>
+        <span class="pagination-status"><%= page_of.replace('{page}', page).replace('{total}', totalPages) %></span>
+        <% if (olderPath) { %><a href="<%= olderPath %>" rel="next"><%= older %> →</a><% } else { %><span></span><% } %>
+      </nav>
+    <% } %>
   </main>
 
 <%- include('../partials/footer'); %>
