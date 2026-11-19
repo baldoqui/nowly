@@ -5,50 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>São Paulo registra o quarto mês de setembro mais chuvoso da história · nowly</title>
   <meta name="description" content="A cidade de São Paulo acumulou 198,2 milímetros de chuva nos primeiros 12 dias de setembro de 2026, consolidando o mês como o quarto setembro mais chuvoso da capital desde o início das medições do Instituto Nacional de Meteorologia (Inmet), em 1943. Entre a manhã de sexta-feira (11) e a manhã deste sábado (12), a estação meteorológica do Mirante de Santana contabilizou 75,4 mm, registrando o maior volume acumulado em 24 horas do Brasil no período.">
-  <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700&display=swap">
   <link rel="stylesheet" href="/style.css" />
+  <script>
+    // Apply the saved or preferred theme before the page paints.
+    document.documentElement.dataset.theme =
+      localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4036324652622082"
      crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <a href="/pt" class="header-title-link" style="text-decoration: none; color: inherit;"><h1>NOWLY</h1></a>
-    <div>
-      <button id="theme-toggle" class="theme-btn" aria-label="Alternar tema"></button>
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="/pt/" class="logo" aria-label="nowly">
+        <svg class="logo-mark" width="24" height="24" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 42V22a14 14 0 0 1 28 0v6" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><circle class="logo-dot" cx="38" cy="40" r="5"/></svg>
+        <span class="logo-word">nowly</span>
+      </a>
+      <nav class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Idioma">
+          <a href="/en/" lang="en" >EN</a>
+          <a href="/pt/" lang="pt" aria-current="page">PT</a>
+        </div>
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Alternar tema"
+          data-label-dark="Mudar para o tema escuro" data-label-light="Mudar para o tema claro"></button>
+      </nav>
     </div>
   </header>
 
-  <main id="content">
-    <article lang="pt-BR">
-      <h2 class="article-title">São Paulo registra o quarto mês de setembro mais chuvoso da história</h2>
-      <p class="article-meta">12 de setembro de 2026 · Meio ambiente · Brazil · fontes em português</p>
-      <p><strong>A cidade de São Paulo acumulou 198,2 milímetros de chuva nos primeiros 12 dias de setembro de 2026, consolidando o mês como o quarto setembro mais chuvoso da capital desde o início das medições do Instituto Nacional de Meteorologia (Inmet), em 1943. Entre a manhã de sexta-feira (11) e a manhã deste sábado (12), a estação meteorológica do Mirante de Santana contabilizou 75,4 mm, registrando o maior volume acumulado em 24 horas do Brasil no período.</strong></p>
+
+  <main id="content" class="container container--narrow">
+    <a href="/pt/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      Todas as notícias
+    </a>
+
+    <article class="article" lang="pt-BR">
+      
+        <p class="kicker">
+          <span class="kicker-category">Meio ambiente</span>
+        </p>
+      
+      <h1 class="article-title">São Paulo registra o quarto mês de setembro mais chuvoso da história</h1>
+      <p class="article-meta">Sábado, 12 de setembro de 2026, 18:45 · 2 fontes</p>
+      <p class="article-lead">A cidade de São Paulo acumulou 198,2 milímetros de chuva nos primeiros 12 dias de setembro de 2026, consolidando o mês como o quarto setembro mais chuvoso da capital desde o início das medições do Instituto Nacional de Meteorologia (Inmet), em 1943. Entre a manhã de sexta-feira (11) e a manhã deste sábado (12), a estação meteorológica do Mirante de Santana contabilizou 75,4 mm, registrando o maior volume acumulado em 24 horas do Brasil no período.</p>
       <p>De acordo com dados do Inmet, o acumulado de setembro só fica atrás dos índices registrados nos anos de 1983 (243,1 mm), 1993 (206,7 mm) e 2015 (201,7 mm). No acumulado do ano de 2026, o valor alcançado até o momento representa a segunda maior marca mensal na cidade, superado apenas pelos 256,4 mm registrados em janeiro. As intensas precipitações provocaram 27 pontos de alagamento pela capital, segundo o Centro de Gerenciamento de Emergências Climáticas (CGE), com impactos na Marginal Tietê e em vias dos bairros Ipiranga, Pinheiros e Santo Amaro. Meteorologistas apontam que a instabilidade foi gerada pelo avanço de frentes frias, a atuação de uma área de baixa pressão, um ciclone extratropical no oceano e o transporte de umidade da região Amazônica. O coordenador estadual de Proteção e Defesa Civil de São Paulo, coronel Araújo Monteiro, ressaltou que a percepção de risco e o monitoramento contínuo são fundamentais para assegurar a proteção da população durante o período crítico.</p>
       <p>A Defesa Civil de São Paulo orientou os moradores a evitarem o trânsito por vias inundadas ou áreas com correnteza, além de manterem atenção redobrada quanto a riscos de deslizamento em encostas. As áreas de instabilidade devem prosseguir sobre a Região Metropolitana e o interior paulista até pelo menos a segunda-feira (14), acompanhadas pela entrada de uma massa de ar frio polar na costa do Sudeste, que manterá as temperaturas baixas nos dias seguintes. Como ainda há previsão de novas ocorrências de chuva ao longo da segunda metade do mês, o acumulado total pode subir e alterar a posição de 2026 no ranking histórico das medições.</p>
 
       
-        <h3>Fontes</h3>
-        <ul class="article-sources">
-          <li><a href="https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-09/capital-paulista-ja-acumula-quase-200-mm-de-chuvas-em-setembro" rel="noopener" target="_blank">ebc.com.br</a></li><li><a href="https://www.jmonline.com.br/geral/s-o-paulo-registra-maior-volume-de-chuva-do-brasil-e-setembro-entra-no-ranking-historico-1.664902" rel="noopener" target="_blank">jmonline.com.br</a></li>
-        </ul>
+        <section class="sources">
+          <h2>Fontes</h2>
+          <ul>
+            
+              <li>
+                <a href="https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-09/capital-paulista-ja-acumula-quase-200-mm-de-chuvas-em-setembro" rel="noopener" target="_blank">
+                  <span><strong>ebc.com.br</strong></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://www.jmonline.com.br/geral/s-o-paulo-registra-maior-volume-de-chuva-do-brasil-e-setembro-entra-no-ranking-historico-1.664902" rel="noopener" target="_blank">
+                  <span><strong>jmonline.com.br</strong></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+              </li>
+            
+          </ul>
+        </section>
       
     </article>
-
-    <p class="disclaimer">Estas notícias são escritas por IA e podem conter erros.</p>
   </main>
 
-<footer>
-    <h3>nowly</h3>
-    <p>Notícias curtas, com fontes.</p>
-    <nav class="footer-nav">
-      <a href="/pt/about">Sobre</a>
-      <a href="/pt/privacy">Política de Privacidade</a>
-      <a href="/pt/contact">Contato</a>
-    </nav>
-    <p class="footer-copyright">&copy; 2025 nowly</p>
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>Estas notícias são escritas por IA e podem conter erros.</p>
+      <nav class="footer-nav">
+        <a href="/pt/about">Sobre</a>
+        <a href="/pt/privacy">Política de Privacidade</a>
+        <a href="/pt/contact">Contato</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="/main.js"></script>
 </body>
 </html>
+

@@ -5,35 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>nowly - Notícias curtas escritas por IA</title>
   <meta name="description" content="Notícias curtas escritas por IA, com links para as fontes. Disponível em português e inglês.">
-  <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@600;700&display=swap">
   <link rel="stylesheet" href="/style.css" />
+  <script>
+    // Apply the saved or preferred theme before the page paints.
+    document.documentElement.dataset.theme =
+      localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4036324652622082"
      crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <a href="/pt" class="header-title-link" style="text-decoration: none; color: inherit;"><h1>NOWLY</h1></a>
-    <div>
-      <button id="theme-toggle" class="theme-btn" aria-label="Alternar tema"></button>
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="/pt/" class="logo" aria-label="nowly">
+        <svg class="logo-mark" width="24" height="24" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 42V22a14 14 0 0 1 28 0v6" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/><circle class="logo-dot" cx="38" cy="40" r="5"/></svg>
+        <span class="logo-word">nowly</span>
+      </a>
+      <nav class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Idioma">
+          <a href="/en/" lang="en" >EN</a>
+          <a href="/pt/" lang="pt" aria-current="page">PT</a>
+        </div>
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Alternar tema"
+          data-label-dark="Mudar para o tema escuro" data-label-light="Mudar para o tema claro"></button>
+      </nav>
     </div>
   </header>
 
-  <main id="content">
+
+  <main id="content" class="container container--narrow page">
     <h2>Sobre o nowly</h2>
     <p>O nowly publica notícias curtas escritas por IA. Cada notícia tem links para fontes onde você pode ler mais.</p>
     <p>As notícias são geradas automaticamente e podem conter erros.</p>
   </main>
 
-<footer>
-    <h3>nowly</h3>
-    <p>Notícias curtas, com fontes.</p>
-    <nav class="footer-nav">
-      <a href="/pt/about">Sobre</a>
-      <a href="/pt/privacy">Política de Privacidade</a>
-      <a href="/pt/contact">Contato</a>
-    </nav>
-    <p class="footer-copyright">&copy; 2025 nowly</p>
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>Estas notícias são escritas por IA e podem conter erros.</p>
+      <nav class="footer-nav">
+        <a href="/pt/about">Sobre</a>
+        <a href="/pt/privacy">Política de Privacidade</a>
+        <a href="/pt/contact">Contato</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="/main.js"></script>
