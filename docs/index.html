@@ -6,14 +6,10 @@
     <title>nowly</title>
     <script>
         const userLang = navigator.language || navigator.userLanguage;
-        if (userLang.startsWith('pt')) {
-            window.location.replace('/pt/index.html');
-        } else {
-            window.location.replace('/en/index.html');
-        }
+        window.location.replace(userLang.startsWith('pt') ? '/pt/' : '/en/');
     </script>
 </head>
 <body>
-    Redirecting...
+    <a href="/en/">nowly</a>
 </body>
 </html>

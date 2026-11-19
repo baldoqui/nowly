@@ -1,0 +1,24 @@
+<%- include('../partials/header', { i18n: i18n, lang: lang }); %>
+
+  <main id="content">
+    <article lang="<%= article.locale %>">
+      <h2 class="article-title"><%= article.title %></h2>
+      <p class="article-meta"><%= articleMeta(article) %></p>
+      <p><strong><%= article.lead %></strong></p>
+      <% paragraphs(article.body).forEach((paragraph) => { %><p><%= paragraph %></p><% }) %>
+      <% paragraphs(article.background).forEach((paragraph) => { %><p><%= paragraph %></p><% }) %>
+
+      <% if (!article.sources) { %>
+        <p class="article-meta"><%= sources_missing %></p>
+      <% } else if (article.sources.length > 0) { %>
+        <h3><%= sources %></h3>
+        <ul class="article-sources">
+          <% article.sources.forEach((source) => { %><li><a href="<%= source.url %>" rel="noopener" target="_blank"><%= source.name %></a></li><% }) %>
+        </ul>
+      <% } %>
+    </article>
+
+    <p class="disclaimer"><%= disclaimer %></p>
+  </main>
+
+<%- include('../partials/footer'); %>
