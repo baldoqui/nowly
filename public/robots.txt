@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://now-ly.com/sitemap.xml
+Sitemap: https://www.now-ly.com/sitemap.xml

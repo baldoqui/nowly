@@ -49,43 +49,40 @@ const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const defaultTheme = savedTheme || (prefersDark ? "dark" : "light");
 setTheme(defaultTheme);
 
-const audio = document.getElementById("audio");
-const playPauseBtn = document.getElementById("play-pause-btn");
-const progressBar = document.getElementById("progress-bar");
-const playbackSpeedBtn = document.getElementById("playback-speed-btn");
+// Filters the article list on the home page, keeping the selection in the URL.
+const filterForm = document.querySelector("form.filters");
 
-function togglePlayPause() {
-  if (audio.paused) {
-    audio.play();
-    playPauseBtn.innerHTML = '<i class="bi bi-pause-circle-fill"></i>';
-    playPauseBtn.setAttribute("aria-label", strings[lang].pause);
-  } else {
-    audio.pause();
-    playPauseBtn.innerHTML = '<i class="bi bi-play-circle-fill"></i>';
-    playPauseBtn.setAttribute("aria-label", strings[lang].play);
+if (filterForm) {
+  const articles = [...document.querySelectorAll(".article-item")];
+  const noMatch = document.querySelector(".no-match");
+
+  const applyFilters = () => {
+    const filters = new FormData(filterForm);
+    let shown = 0;
+
+    for (const article of articles) {
+      const match = ["sourceLanguage", "country"].every((name) => {
+        const value = filters.get(name);
+        return !value || article.dataset[name] === value;
+      });
+      article.hidden = !match;
+      if (match) shown++;
+    }
+
+    noMatch.hidden = shown > 0;
+    const query = new URLSearchParams([...filters].filter(([, value]) => value)).toString();
+    history.replaceState(null, "", query ? `?${query}` : location.pathname);
+  };
+
+  const params = new URLSearchParams(location.search);
+  for (const select of filterForm.querySelectorAll("select")) {
+    select.value = params.get(select.name) ?? "";
+    select.addEventListener("change", applyFilters);
   }
+  filterForm.querySelector("button").hidden = true;
+  filterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    applyFilters();
+  });
+  applyFilters();
 }
-
-playPauseBtn.addEventListener("click", togglePlayPause);
-
-audio.addEventListener("timeupdate", () => {
-  const progress = (audio.currentTime / audio.duration) * 100;
-  progressBar.value = progress;
-});
-
-progressBar.addEventListener("input", () => {
-  const time = (progressBar.value / 100) * audio.duration;
-  audio.currentTime = time;
-});
-
-const playbackSpeeds = [1, 1.5, 2, 0.5];
-let currentSpeedIndex = 0;
-
-playbackSpeedBtn.addEventListener("click", () => {
-  currentSpeedIndex = (currentSpeedIndex + 1) % playbackSpeeds.length;
-  const newSpeed = playbackSpeeds[currentSpeedIndex];
-  audio.playbackRate = newSpeed;
-  playbackSpeedBtn.textContent = `${newSpeed}x`;
-});
-
-playPauseBtn.innerHTML = '<i class="bi bi-play-circle-fill"></i>';

@@ -1,14 +1,40 @@
 <%- include('../partials/header', { i18n: i18n, lang: lang }); %>
 
-  <div id="audio-player-container">
-    <div id="audio-player">
-      <button id="play-pause-btn" class="play-btn" aria-label="<%= play_alt %>"></button>
-      <input type="range" id="progress-bar" value="0" aria-label="Audio progress" />
-      <button id="playback-speed-btn" aria-label="Change playback speed">1x</button>
-      <audio id="audio" src="https://content.now-ly.com/lasthour-<%= lang %>.mp3"></audio>
-    </div>
-  </div>
+  <main id="content">
+    <% if (sourceLanguages.length > 0 || countries.length > 0) { %>
+      <form class="filters" method="get">
+        <% if (sourceLanguages.length > 0) { %>
+          <label><%= filter_source_language %>
+            <select name="sourceLanguage">
+              <option value=""><%= filter_any %></option>
+              <% sourceLanguages.forEach((code) => { %><option value="<%= code %>"><%= languageName(code) %></option><% }) %>
+            </select>
+          </label>
+        <% } %>
+        <% if (countries.length > 0) { %>
+          <label><%= filter_country %>
+            <select name="country">
+              <option value=""><%= filter_any %></option>
+              <% countries.forEach((country) => { %><option value="<%= country %>"><%= country %></option><% }) %>
+            </select>
+          </label>
+        <% } %>
+        <button><%= filter_apply %></button>
+      </form>
+    <% } %>
 
-  <main id="content"><%- contentHtml %></main>
+    <% if (articles.length === 0) { %><p><%= no_articles %></p><% } %>
+
+    <% articles.forEach((article) => { %>
+      <article class="article-item" data-source-language="<%= article.sourceLanguage ?? '' %>" data-country="<%= article.country ?? '' %>">
+        <h2><a href="/<%= lang %>/<%= article.slug %>"><%= article.title %></a></h2>
+        <p class="article-meta"><%= articleMeta(article) %></p>
+        <p><%= article.lead %></p>
+      </article>
+    <% }) %>
+
+    <p class="no-match" hidden><%= no_match %></p>
+    <p class="disclaimer"><%= disclaimer %></p>
+  </main>
 
 <%- include('../partials/footer'); %>
