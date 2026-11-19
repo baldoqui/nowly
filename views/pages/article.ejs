@@ -15,8 +15,11 @@
       <h1 class="article-title"><%= article.title %></h1>
       <p class="article-meta"><%= dateTime(article.publishedAt) %><% if (sourcesCount(article)) { %> · <%= sourcesCount(article) %><% } %></p>
       <p class="article-lead"><%= article.lead %></p>
-      <% paragraphs(article.body).forEach((paragraph) => { %><p><%= paragraph %></p><% }) %>
-      <% paragraphs(article.background).forEach((paragraph) => { %><p><%= paragraph %></p><% }) %>
+      <% const text = [...paragraphs(article.body), ...paragraphs(article.background)]; %>
+      <% text.forEach((paragraph, index) => { %>
+        <p><%= paragraph %></p>
+        <% if (index === Math.min(1, text.length - 1)) { %><%- include('../partials/ad-in-article'); %><% } %>
+      <% }) %>
 
       <% if (!article.sources) { %>
         <p class="article-meta"><%= sources_missing %></p>
