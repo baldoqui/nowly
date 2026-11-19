@@ -28,6 +28,12 @@ app.get('/:lang', async (req, res) => {
   res.render('pages/index', await indexPage(toLang(req.params.lang)));
 });
 
+app.get('/:lang/page/:page', async (req, res) => {
+  const page = Number(req.params.page);
+  const data = await indexPage(toLang(req.params.lang), Number.isInteger(page) && page > 0 ? page : 1);
+  res.render('pages/index', data);
+});
+
 for (const name of ['about', 'contact', 'privacy']) {
   app.get(`/:lang/${name}`, (req, res) => {
     const lang = toLang(req.params.lang);

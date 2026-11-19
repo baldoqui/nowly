@@ -61,9 +61,17 @@ function groupByDay(articles: Article[], label: (date: Date) => string): DayGrou
   return groups;
 }
 
-export async function indexPage(lang: Lang) {
+export const PAGE_SIZE = 16;
+
+export function pagePath(lang: Lang, page: number) {
+  return page === 1 ? `/${lang}/` : `/${lang}/page/${page}`;
+}
+
+export async function indexPage(lang: Lang, page = 1) {
   const articles = await listArticles(lang);
   const pageHelpers = helpers(lang);
+  const totalPages = Math.max(1, Math.ceil(articles.length / PAGE_SIZE));
+  const pageArticles = articles.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return {
     ...i18n[lang],
@@ -71,7 +79,11 @@ export async function indexPage(lang: Lang) {
     lang,
     i18n,
     articles,
-    groups: groupByDay(articles, pageHelpers.dayLabel),
+    page,
+    totalPages,
+    newerPath: page > 1 ? pagePath(lang, page - 1) : null,
+    olderPath: page < totalPages ? pagePath(lang, page + 1) : null,
+    groups: groupByDay(pageArticles, pageHelpers.dayLabel),
   };
 }
 
