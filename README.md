@@ -16,6 +16,7 @@ Set `DATABASE_URL` in `.env` (see `.env.example`).
 ```bash
 npm run dev            # local server on http://localhost:3000, reading Postgres live
 npm run build:static   # render every page from Postgres into docs/
+npm run publish:site   # build:static on main, commit docs/ and push (deploys)
 ```
 
-To publish, run `npm run build:static` on `main`, commit `docs/` and push.
+`nowly_core`'s `scripts/daily.sh` writes new articles and then runs `scripts/publish.sh`.

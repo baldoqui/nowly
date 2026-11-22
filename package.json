@@ -8,7 +8,8 @@
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "build:static": "rm -rf dist && tsc && node dist/scripts/generate-static.js"
+    "build:static": "rm -rf dist && tsc && node dist/scripts/generate-static.js",
+    "publish:site": "scripts/publish.sh"
   },
   "keywords": [],
   "author": "",
